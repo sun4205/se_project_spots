@@ -1,7 +1,8 @@
 # Project 3: Se_project_spots
 
+## A description of the project and its functionality
 This is the third project of the Software Engineering program at TripleTen. It was created using HTML and CSS.
-Responsive design was used to ensure the web and application contents are correctly displayed based on the screen size. The layout is divided into sections including profile, images, brief descriptions and footer.
+Responsive design was used to ensure the web and application contents are correctly displayed based on [Figma](https://www.figma.com/design/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project%3A-Spots?node-id=2-60&t=X76EN5Cqn0WdoqRy-0). The layout is divided into sections including profile, images, brief descriptions and footer.
 
 ## Technologies and Techniques Used
 - Flexbox layout : aligning items in a container.
