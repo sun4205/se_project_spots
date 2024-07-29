@@ -1,21 +1,19 @@
-# Project 3: Spots
+# Project 3: Se_project_spots
 
-### Overview  
+This is the third project of the Software Engineering program at TripleTen. It was created using HTML and CSS.
+Responsive design was used to ensure the web and application contents are correctly displayed based on the screen size. The layout is divided into sections including profile, images, brief descriptions and footer.
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Technologies and Techniques Used
+- Flexbox layout : aligning items in a container.
+- Grid layout :arranges items throughout the entire layout.
+- Text Overflow with Ellipsis : Hides long text by displaying it as a limited number of lines on the screen, ending with an ellipsis.
+- Setting up the fonts : Using Poppins for a better design aesthetic.
+
+
+## Screenshots
+- This is screenshot for desktop screen. ![alt text](./images/demo/Screenshot_desktop.png)
+- This is screenshot for mobile screen.![alt text](./images/demo/Screenshot_mobile.png)
+
+
+## Deployment
+project on GitHub Pages [here](https://github.com/sun4205/se_project_spots.git)
