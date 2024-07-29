@@ -5,8 +5,8 @@ This is the third project of the Software Engineering program at TripleTen. It w
 Responsive design was used to ensure the web and application contents are correctly displayed based on [Figma](https://www.figma.com/design/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project%3A-Spots?node-id=2-60&t=X76EN5Cqn0WdoqRy-0). The layout is divided into sections including profile, images, brief descriptions and footer.
 
 ## Technologies and techniques used
-- HTML: HTML is the standard markup language for Web pages
-- CSS: CSS (Cascading Style Sheets) allows you to create great-looking web pages
+- HTML: HTML is the standard markup language for Web pages.
+- CSS: CSS (Cascading Style Sheets) allows you to create great-looking web pages.
 - Flexbox layout : Aligning items in a container.
 - Grid layout :Arranges items throughout the entire layout.
 - Text Overflow with Ellipsis : Hides long text by displaying it as a limited number of lines on the screen, ending with an ellipsis.
@@ -20,3 +20,4 @@ Responsive design was used to ensure the web and application contents are correc
 
 ## Deployment
 project on GitHub Pages [here](https://github.com/sun4205/se_project_spots.git)
+video for the project [here](https://drive.google.com/file/d/1NqBQDpZrC54xotf4exrsZVZOf09G1RMe/view?usp=sharing)
