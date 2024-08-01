@@ -19,5 +19,6 @@ Responsive design was used to ensure the web and application contents are correc
 
 
 ## Deployment
+project on GitHub Pages [here](https://tripleten.com/trainer/web/lesson/07e0bdf0-d597-4a8f-8dda-eada84722122/?from=program)
 project on GitHub Pages [here](https://github.com/sun4205/se_project_spots.git)
-video for the project [here](https://drive.google.com/file/d/1NqBQDpZrC54xotf4exrsZVZOf09G1RMe/view?usp=sharing)
+video for the project [here](https://drive.google.com/file/d/1QcjdvLiNJkiOdXLkhm2G6JRMmT0pieMP/view?usp=sharing)
