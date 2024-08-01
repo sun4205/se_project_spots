@@ -47,13 +47,14 @@
 }
 
 .profile__edit-btn {
+  background-image: url(../images/Button\ secondary.svg);
+  width: 107.34px;
+  height: 16px;
   margin-top: auto;
   border: none;
   outline: none;
-  color: rgba(33, 33, 33, 0.7);
   display: flex;
-  font-size: 16px;
-  font-weight: 500;
+  color: rgba(33, 33, 33, 0.7);
 }
 
 .profile__edit-btn:hover {
@@ -127,7 +128,7 @@
   .profile__name {
     font-size: 20px;
     margin: 0 0 6px;
-    line-height: 20px;    
+    line-height: 20px;
     max-width: 288px;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -140,7 +141,7 @@
   .profile__description {
     margin: 0 0 32px;
     font-size: 16px;
-    line-height: 16px;    
+    line-height: 16px;
     max-width: 288px;
     white-space: normal;
     text-overflow: ellipsis;
@@ -171,7 +172,7 @@
     height: 52px;
     padding: 0;
     margin: 0;
-    font-size: 16px;    
+    font-size: 16px;
     padding: 18px 32px;
   }
 }
