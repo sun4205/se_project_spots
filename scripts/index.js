@@ -31,12 +31,12 @@ const profileEditButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
-const editModal = document.querySelector("#edit-modal");
+const editModal = document.querySelector("#modal-edit");
 const editFormElement = editModal.querySelector(".modal__form");
 const editModalCloseBtn = editModal.querySelector(".modal__close-btn");
-const editModalNameInput = editModal.querySelector("#profile-name-input");
+const editModalNameInput = editModal.querySelector("#modal-profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
-  "#profile-description-input"
+  "#modal-profile-description-input"
 );
 
 const cardTemplate = document.querySelector("#card-template");

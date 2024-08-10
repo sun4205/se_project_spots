@@ -51,41 +51,6 @@
                   <button type="button" class="card__like-btn"></button>
                 </div>
               </li>
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
             </template>
           </ul>
         </section>
@@ -93,29 +58,36 @@
       <footer class="footer">
         <p class="footer__copyright">2023&copy;Spots</p>
       </footer>
-      <div class="modal" id="edit-modal">
+      <div class="modal" id="modal-edit">
         <div class="modal__container">
-          <button type="submit" class="modal__close-btn modal__button"></button>
-          <h2 class="modal__title">Edit profile</h2>
-          <form name="edit-profile" class="modal__form">
-            <label for="profile-name-input" class="modal__label">
-              Name
-              <input
-                id="profile-name-input"
-                type="text"
-                class="name__input"
-                placeholder="Type your name"
-              />
-            </label>
-            <label for="profile-description-input" class="modal__label">
-              Description
-              <input
-                id="profile-description-input"
-                type="text"
-                class="name__input"
-                placeholder="Describe yourself"
-              />
-            </label>
+          <div class="modal__header">
+            <h2 class="modal__title">Edit profile</h2>
+            <button
+              type="submit"
+              class="modal__close-btn modal__button"
+            ></button>
+          </div>
+          <form name="modal-edit-profile" class="modal__form">
+            <label for="modal-profile-name-input" class="modal__label">
+              Name</label
+            >
+            <input
+              id="modal-profile-name-input"
+              type="text"
+              class="modal__input"
+              placeholder="Type your name"
+            />
+
+            <label for="modal-profile-description-input" class="modal__label">
+              Description</label
+            >
+            <input
+              id="modal-profile-description-input"
+              type="text"
+              class="modal__input"
+              placeholder="Describe yourself"
+            />
+
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
