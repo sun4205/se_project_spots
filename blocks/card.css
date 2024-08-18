@@ -44,8 +44,17 @@
 }
 
 .card__like-btn:hover {
-  filter: grayscale(100%) brightness(0%);
+  filter: grayscale(0%) brightness(1);
   cursor: pointer;
+}
+
+.card__like-btn_liked {
+  background-image: url(../images/liked.svg);  
+  filter: grayscale(0%) brightness(1);
+}
+
+.card__like-btn_liked:hover {
+  background-image: url(../images/likedhover.svg);
 }
 
 @media screen and (max-width: 627px) {
