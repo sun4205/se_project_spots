@@ -76,6 +76,7 @@
 }
 
 .modal__input {
+  font-family: inherit;
   padding: 16px 12px;
   color: #212121;
   border: 1px solid #21212166;
