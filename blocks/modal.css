@@ -77,7 +77,7 @@
   cursor: pointer;
 }
 
-.modal__close_type_preview {
+.modal__close-btn_type_preview {
   background-image: url(../images/close_button.svg);
   top: 0;
   right: -53px;
@@ -214,10 +214,10 @@
     height: 52px;
     margin-bottom: 12px;
   }
-  .modal__close_type_preview {
+  .modal__close-btn_type_preview {
     position: absolute;
     top: -30px;
-    right: 0px;
+    right: -8px;
     z-index: 2;
     cursor: pointer;
   }
