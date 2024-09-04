@@ -70,25 +70,33 @@
           </div>
           <form name="profile-form" class="modal__form">
             <label for="modal-profile-name-input" class="modal__label">
-              Name</label
-            >
+              Name
             <input
               id="modal-profile-name-input"
               type="text"
               class="modal__input"
               placeholder="Type your name"
+              minlength="2"
+              maxlength="40"
+              required
             />
-
-            <label for="modal-profile-description-input" class="modal__label">
-              Description</label
+              <span id="modal-profile-name-input-error" class="modal__error"></span>
+              </label
             >
+            <label for="modal-profile-description-input" class="modal__label">
+              Description
             <input
               id="modal-profile-description-input"
               type="text"
               class="modal__input"
               placeholder="Describe yourself"
+              minlength="2"
+              maxlength="200"
+              required
             />
-
+            <span id="modal-profile-description-input-error" class="modal__error"></span>
+            </label
+            >
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
@@ -105,25 +113,32 @@
           </div>
           <form name="card-form" class="modal__form">
             <label for="modal__add-card-link-input" class="modal__label">
-              Image link</label
-            >
+              Image link
             <input
               id="modal__add-card-link-input"
               name="link"
               class="modal__input"
               placeholder="Pasted a link to the picture"
+              type="url"
+              required
             />
-
-            <label for="modal__add-card-name-input" class="modal__label">
-              Caption</label
+            <span id="modal__add-card-link-input-error" class="modal__error"></span>
+            </label
             >
+            <label for="modal__add-card-name-input" class="modal__label">
+              Caption
             <input
               id="modal__add-card-name-input"
               name="name"
               class="modal__input"
               placeholder="Type your caption"
+              minlength="2"
+              maxlength="30"
+              required
             />
-
+            <span id="modal__add-card-name-input-error" class="modal__error"></span>
+            </label
+            >
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
@@ -141,5 +156,6 @@
       </div>
     </div>
     <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validation.js"></script>
   </body>
 </html>
