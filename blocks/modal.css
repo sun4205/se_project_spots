@@ -185,6 +185,10 @@
   text-align: center;
 }
 
+.modal__submit-btn:hover {
+  background-color: rgba(33, 33, 33, 0.8);
+}
+
 .modal__submit-btn_disabled {
   background-color: rgba(33, 33, 33, 0.5);
   cursor: not-allowed;
