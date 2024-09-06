@@ -164,9 +164,6 @@ editModalCloseBtn.addEventListener("click", () => {
 cardModalbtn.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
-  resetValidation(modalForm, [cardNameInput, cardLinkInput], settings);
   openModal(cardModal);
 });
 cardModalClosebtn.addEventListener("click", () => {
