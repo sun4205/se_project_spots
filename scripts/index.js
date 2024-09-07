@@ -92,23 +92,12 @@ function closeModal(modal) {
   document.removeEventListener("click", handleOutsideClick);
   console.log("Modal closed and Escape key listener removed");
 }
+const closeButtons = document.querySelectorAll(".modal__close-btn");
 
-const popups = document.querySelectorAll(".popup");
-
-popups.forEach((popup) => {
-  if (evt.target.classList.contains("popup_opened")) {
-    closePopup(popup);
-  }
-
-  if (evt.target.classList.contains("popup__close")) {
-    closePopup(popup);
-  }
-});
-
-const closeButtons = document.querySelectorAll(".popup__close");
 closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
+  const modal = button.closest(".modal");
+
+  button.addEventListener("click", () => closeModal(modal));
 });
 
 function getCardElement(data) {
