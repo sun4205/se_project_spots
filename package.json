@@ -4,12 +4,19 @@
   "description": "This is the third project of the Software Engineering program at TripleTen. It was created using HTML and CSS.\r Responsive design was used to ensure the web and application contents are correctly displayed based on [Figma](https://www.figma.com/design/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project%3A-Spots?node-id=2-60&t=X76EN5Cqn0WdoqRy-0). The layout is divided into sections including profile, images, brief descriptions and footer.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve --mode development"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "7.18.9",
+    "babel-loader": "8.2.5",
     "webpack": "5.76.0",
-    "webpack-cli": "4.10.0"
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.9.3"
+  },
+  "dependencies": {
+    "core-js": "3.23.5"
   }
 }
