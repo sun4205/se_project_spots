@@ -1,4 +1,6 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -9,7 +11,6 @@ module.exports = {
     filename: "main.js",
     publicPath: "",
   },
-
   mode: "development",
   devtool: "inline-source-map",
   stats: "errors-only",
@@ -21,8 +22,6 @@ module.exports = {
     liveReload: true,
     hot: false,
   },
-
-  // Babel related configuration
   target: ["web", "es5"],
   module: {
     rules: [
@@ -31,6 +30,16 @@ module.exports = {
         loader: "babel-loader",
         exclude: "/node_modules/",
       },
+      {
+        test: /\.html$/,
+        use: ["html-loader"]
+      }
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+    }),
+    new CleanWebpackPlugin(),
+  ],
 };

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Responsive web design that adapts based on screen size"
+    />
+    <meta name="author" content="Lee Hanna" />
+    <meta
+      name="keywords"
+      content="Responsive design, Grid, Flexbox, Overflow"
+    />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <title>Spots</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img src="./images/logo.svg" alt="spot__logo" class="header__logo" />
+      </header>
+      <main class="content">
+        <section class="profile page__section">
+          <img
+            src="./images/avatar.svg"
+            alt="Bessie Coleman"
+            class="profile__avatar"
+          />
+          <div class="profile__column">
+            <h1 class="profile__name">Bessie Coleman</h1>
+            <p class="profile__description">Civil Avator</p>
+            <button
+              type="button"
+              class="profile__edit-btn profile__button"
+            ></button>
+          </div>
+
+          <button type="button" class="profile__add-btn profile__button">
+            + New Post
+          </button>
+        </section>
+        <section class="cards page__section">
+          <ul class="cards__list">
+            <template id="card-template">
+              <li class="card">
+                <img src="" alt="" class="card__image" />
+                <div class="card__content">
+                  <h2 class="card__title"></h2>
+                  <button type="button" class="card__like-btn"></button>
+                  <button type="button" class="card__delete-btn"></button>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">2023&copy;Spots</p>
+      </footer>
+      <div class="modal" id="modal-edit">
+        <div class="modal__container">
+          <div class="modal__header">
+            <h2 class="modal__title">Edit profile</h2>
+            <button
+              type="submit"
+              class="modal__close-btn modal__button"
+            ></button>
+          </div>
+          <form name="profile-form" class="modal__form">
+            <label for="modal-profile-name-input" class="modal__label">
+              Name
+              <input
+                id="modal-profile-name-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span
+                id="modal-profile-name-input-error"
+                class="modal__error"
+              ></span>
+            </label>
+            <label for="modal-profile-description-input" class="modal__label">
+              Description
+              <input
+                id="modal-profile-description-input"
+                type="text"
+                class="modal__input"
+                placeholder="Describe yourself"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span
+                id="modal-profile-description-input-error"
+                class="modal__error"
+              ></span>
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" id="modal__add-card">
+        <div class="modal__container">
+          <div class="modal__header">
+            <h2 class="modal__title">New post</h2>
+            <button
+              type="submit"
+              class="modal__close-btn modal__button"
+            ></button>
+          </div>
+          <form name="card-form" class="modal__form">
+            <label for="modal__add-card-link-input" class="modal__label">
+              Image link
+              <input
+                id="modal__add-card-link-input"
+                name="link"
+                class="modal__input"
+                placeholder="Pasted a link to the picture"
+                type="url"
+                required
+              />
+              <span
+                id="modal__add-card-link-input-error"
+                class="modal__error"
+              ></span>
+            </label>
+            <label for="modal__add-card-name-input" class="modal__label">
+              Caption
+              <input
+                id="modal__add-card-name-input"
+                name="name"
+                class="modal__input"
+                placeholder="Type your caption"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span
+                id="modal__add-card-name-input-error"
+                class="modal__error"
+              ></span>
+            </label>
+            <button
+              type="submit"
+              class="modal__submit-btn modal__submit-btn_disabled"
+              disabled
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal__preview">
+      <div class="modal__container modal__container_type_preview">
+        <button
+          type="button"
+          class="modal__close-btn modal__close-btn_type_preview"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption"></p>
+      </div>
+    </div>
+    <script defer src="./src/index.js"></script>
+    <script defer src="./scripts/validation.js"></script>
+  </body>
+</html>
