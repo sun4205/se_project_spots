@@ -1,0 +1,180 @@
+.profile {
+  display: flex;
+  padding: 34px 0 20px;
+  border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
+  align-items: flex-start;
+}
+
+.profile__avatar {
+  object-fit: cover;
+  width: 190px;
+  height: 190px;
+  margin-right: 20px;
+}
+
+.profile__column {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+}
+
+.profile__name {
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box; /* Vendor extension for WebKit browsers */
+  -webkit-line-clamp: 3; /* Vendor extension for WebKit browsers */
+  -webkit-box-orient: vertical; /* Vendor extension for WebKit browsers */
+  max-width: 420px;
+  width: 100%;
+  max-height: calc(1.2em * 3);
+}
+
+.profile__description {
+  margin: 0;
+  color: rgba(33, 33, 33, 0.7);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box; /* Vendor extension for WebKit browsers */
+  -webkit-line-clamp: 3; /* Vendor extension for WebKit browsers */
+  -webkit-box-orient: vertical; /* Vendor extension for WebKit browsers */
+  max-width: 420px;
+  max-height: calc(1.2em * 3);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profile__edit-btn {
+  background-image: url(../images/Button\ secondary.svg);
+  width: 107.34px;
+  height: 16px;
+  margin-top: auto;
+  border: none;
+  outline: none;
+  display: flex;
+  opacity: 0.7;
+  color: #212121;
+}
+
+.profile__edit-btn:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.profile__pencil-icon {
+  filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
+  margin-right: 8px;
+}
+
+.profile__pencil-icon:hover {
+  filter: grayscale(100%) brightness(0%);
+  cursor: pointer;
+}
+
+.profile__button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.profile__button:focus,
+.profile__button:active {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.profile__add-btn {
+  min-width: 149px;
+  height: 52px;
+  margin-left: auto;
+  border: none;
+  outline: none;
+  margin-top: auto;
+  border-radius: 8px;
+  background-color: black;
+  color: #fff;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  padding: 18px 32px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile__add-btn:hover {
+  background-color: rgba(33, 33, 33, 0.8);
+}
+
+@media screen and (max-width: 627px) {
+  .profile {
+    flex-direction: column;
+    max-width: 288px;
+    min-height: 274px;
+    align-items: center;
+    text-align: center;
+    padding-top: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+  }
+
+  .profile__avatar {
+    margin: 0 0 12px;
+    height: 80px;
+    width: 80px;
+  }
+
+  .profile__name {
+    font-size: 20px;
+    margin: 0 0 6px;
+    line-height: 20px;
+    max-width: 288px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box; /* Vendor extension for WebKit browsers */
+    -webkit-line-clamp: 3; /* Vendor extension for WebKit browsers */
+    -webkit-box-orient: vertical; /* Vendor extension for WebKit browsers */
+  }
+
+  .profile__description {
+    margin: 0 0 32px;
+    font-size: 16px;
+    line-height: 16px;
+    max-width: 288px;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box; /* Vendor extension for WebKit browsers */
+    -webkit-line-clamp: 3; /* Vendor extension for WebKit browsers */
+    -webkit-box-orient: vertical; /* Vendor extension for WebKit browsers */
+  }
+
+  .profile__column {
+    max-width: 100%;
+    margin: 0 0 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    min-height: unset;
+  }
+
+  .profile__edit-btn {
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .profile__add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 288px;
+    height: 52px;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    padding: 18px 32px;
+  }
+}
