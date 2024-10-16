@@ -1,5 +1,5 @@
 import "./index.css";
-import { enableValidation,settings } from "../scripts/validation";
+import { enableValidation, settings, resetValidation } from "../scripts/validation";
 import Api from "../utils/Api.js";
 
 const initialCards = [
@@ -39,17 +39,27 @@ const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "2d4b9f7c-b9f4-4e18-86c3-caa0e9c274de",
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  },
 });
 
-api.getInitialCards()
-.then((cards)=>{
-  cards.forEach((card) => {
-    const cardElement = getCardElement(card);
-    cardsList.prepend(cardElement);
-  });
-}).catch(console.error);
+
+api
+  .getAppInfo()
+  .then(([cards,userInfo]) => {
+    cards.forEach((card) => {
+      const cardElement = getCardElement(card);
+      cardsList.prepend(cardElement);
+    });
+    
+    profileName.textContent = userInfo.name;
+    profileDescription.textContent = userInfo.about;
+    
+    const avatarImage = document.querySelector(".profile__avatar");
+    avatarImage.src = userInfo.avatar;
+    
+  })
+  .catch(console.error);
 
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
@@ -73,6 +83,13 @@ const cardModalClosebtn = cardModal.querySelector(".modal__close-btn");
 const cardNameInput = cardModal.querySelector("#modal__add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#modal__add-card-link-input");
 
+const avatarModal = document.getElementById("modal-avatar-edit");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarDescriptionInput = avatarModal.querySelector("#modal-avatar-description-input");
+const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
+const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
+
+
 const previewModal = document.querySelector("#modal__preview");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
@@ -80,6 +97,7 @@ const previewModalCloseBtn = previewModal.querySelector(".modal__close-btn");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
+
 
 let currentModal = null;
 
@@ -153,9 +171,16 @@ function getCardElement(data) {
 
 function handleEditForSubmit(e) {
   e.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+   .editUserInfo({name:editModalNameInput.value, about:editModalDescriptionInput.value})
+   .then((data)=>{
+    
+    profileName.textContent = data.name;
+    profileDescription.textContent = data.about;
+    closeModal(editModal);
+   })
+   .catch(console.error);
+  
 }
 
 function handleAddCardSubmit(e) {
@@ -185,6 +210,10 @@ cardModalbtn.addEventListener("click", () => {
   openModal(cardModal);
 });
 
+avatarEditButton.addEventListener("click", () => {
+  openModal(avatarModal); 
+});
+
 profileForm.addEventListener("submit", handleEditForSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
@@ -195,12 +224,3 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 
 enableValidation(settings);
 
-
-console.log("Hello, world!");
-
-const numbers = [2, 3, 5];
-
-// Arrow function. How will Internet Explorer cope with it?
-const doubledNumbers = numbers.map(number => number * 2); 
-
-console.log(doubledNumbers); 
