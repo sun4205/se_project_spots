@@ -1,5 +1,6 @@
 import "./index.css";
 import { enableValidation,settings } from "../scripts/validation";
+import Api from "../utils/Api.js";
 
 const initialCards = [
   {
@@ -33,6 +34,22 @@ const initialCards = [
 ];
 
 console.log(initialCards);
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "2d4b9f7c-b9f4-4e18-86c3-caa0e9c274de",
+    "Content-Type": "application/json"
+  }
+});
+
+api.getInitialCards()
+.then((cards)=>{
+  cards.forEach((card) => {
+    const cardElement = getCardElement(card);
+    cardsList.prepend(cardElement);
+  });
+}).catch(console.error);
 
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
@@ -171,10 +188,10 @@ cardModalbtn.addEventListener("click", () => {
 profileForm.addEventListener("submit", handleEditForSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((card) => {
-  const cardElement = getCardElement(card);
-  cardsList.prepend(cardElement);
-});
+// initialCards.forEach((card) => {
+//   const cardElement = getCardElement(card);
+//   cardsList.prepend(cardElement);
+// });
 
 enableValidation(settings);
 
