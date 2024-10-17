@@ -1,5 +1,9 @@
 import "./index.css";
-import { enableValidation, settings, resetValidation } from "../scripts/validation";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation";
 import Api from "../utils/Api.js";
 
 const initialCards = [
@@ -43,21 +47,19 @@ const api = new Api({
   },
 });
 
-
 api
   .getAppInfo()
-  .then(([cards,userInfo]) => {
+  .then(([cards, userInfo]) => {
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardsList.prepend(cardElement);
     });
-    
+
     profileName.textContent = userInfo.name;
     profileDescription.textContent = userInfo.about;
-    
+
     const avatarImage = document.querySelector(".profile__avatar");
     avatarImage.src = userInfo.avatar;
-    
   })
   .catch(console.error);
 
@@ -84,11 +86,14 @@ const cardNameInput = cardModal.querySelector("#modal__add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#modal__add-card-link-input");
 
 const avatarModal = document.getElementById("modal-avatar-edit");
+const avatarElement = document.querySelector(".profile__avatar");
+const avatarEditButton = document.querySelector(".profile__avatar-btn");
 const avatarForm = avatarModal.querySelector(".modal__form");
-const avatarDescriptionInput = avatarModal.querySelector("#modal-avatar-description-input");
+const avatarInput = avatarModal.querySelector(
+  "#modal-avatar-description-input"
+);
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
-
 
 const previewModal = document.querySelector("#modal__preview");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
@@ -97,7 +102,6 @@ const previewModalCloseBtn = previewModal.querySelector(".modal__close-btn");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
-
 
 let currentModal = null;
 
@@ -172,15 +176,16 @@ function getCardElement(data) {
 function handleEditForSubmit(e) {
   e.preventDefault();
   api
-   .editUserInfo({name:editModalNameInput.value, about:editModalDescriptionInput.value})
-   .then((data)=>{
-    
-    profileName.textContent = data.name;
-    profileDescription.textContent = data.about;
-    closeModal(editModal);
-   })
-   .catch(console.error);
-  
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 function handleAddCardSubmit(e) {
@@ -191,6 +196,27 @@ function handleAddCardSubmit(e) {
   e.target.reset();
   disableButton(cardSubmitBtn, settings);
   closeModal(cardModal);
+}
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarInput.value)
+    .then((data) => {
+      console.log(data);
+
+      if (data.avatar) {
+        avatarElement.src = data.avatar;
+        avatarElement.alt = "Updated Avatar";
+      } else {
+        console.error("Avatar URL not found in the response");
+      }
+
+      closeModal(avatarModal);
+
+      avatarForm.reset();
+    })
+    .catch(console.error);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -211,8 +237,10 @@ cardModalbtn.addEventListener("click", () => {
 });
 
 avatarEditButton.addEventListener("click", () => {
-  openModal(avatarModal); 
+  openModal(avatarModal);
 });
+
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 profileForm.addEventListener("submit", handleEditForSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
@@ -223,4 +251,3 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 // });
 
 enableValidation(settings);
-

@@ -50,6 +50,22 @@ class Api {
         Promise.reject(`Error: ${res.status}`);
       });
     }
+
+    editAvatarInfo(avatar) {
+      return fetch(`${this._baseUrl}/users/me/avatar`, {
+        method: "PATCH",
+        headers: this._headers,
+        // Send the data in the body as a JSON string.
+        body: JSON.stringify({
+          avatar
+        }),
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        Promise.reject(`Error: ${res.status}`);
+      });
+    }
   
     // create another method, getUserInfo(different base url)
   }
