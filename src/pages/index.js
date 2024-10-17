@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation";
 import Api from "../utils/Api.js";
 
@@ -148,7 +149,7 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closeModal(modal));
 });
 
-function handleDeleteCard(cardElement, cardId){
+function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
   selectedCardId = cardId;
   openModal(deleteModal);
@@ -163,8 +164,6 @@ function getCardElement(data) {
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
 
-  
-
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
@@ -173,19 +172,19 @@ function getCardElement(data) {
     cardLikeBtn.classList.add("card__like-btn_liked");
   }
 
-  function handleLike(evt,id){
+  function handleLike(evt, id) {
     const isLiked = cardLikeBtn.classList.contains("card__like-btn_liked");
-    api.changeLikeStatus(id, !isLiked)
+    api
+      .changeLikeStatus(id, !isLiked)
       .then((res) => {
         cardLikeBtn.classList.toggle("card__like-btn_liked", res.isLiked);
       })
       .catch(console.error);
   }
-  
 
   cardLikeBtn.addEventListener("click", (evt) => {
     // cardLikeBtn.classList.toggle("card__like-btn_liked");
-    handleLike(evt,data._id);
+    handleLike(evt, data._id);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -198,7 +197,7 @@ function getCardElement(data) {
   cardDeleteBtn.addEventListener("click", (evt) => {
     // cardElement.remove();
     // openModal(deleteModal);
-    handleDeleteCard(cardElement,data._id);
+    handleDeleteCard(cardElement, data._id);
   });
 
   return cardElement;
@@ -222,23 +221,29 @@ function handleEditForSubmit(e) {
 function handleAddCardSubmit(e) {
   e.preventDefault();
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  const cardElement = getCardElement(inputValues);
-  cardsList.prepend(cardElement);
-  e.target.reset();
-  disableButton(cardSubmitBtn, settings);
-  closeModal(cardModal);
+  api
+    .addNewCard(inputValues)
+    .then((data) => {
+      const cardElement = getCardElement(data);
+      cardsList.prepend(cardElement);
+      e.target.reset();
+      disableButton(cardSubmitBtn, settings);
+      closeModal(cardModal);
+    })
+    .catch(console.error);
 }
 
-function handleDeleteSubmit(evt){
+function handleDeleteSubmit(evt) {
   evt.preventDefault();
-  api.deleteCard(selectedCardId)
-  .then(()=>{
-    selectedCard.remove(); 
-      selectedCard = null;  
-      selectedCardId = null;     
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      selectedCard = null;
+      selectedCardId = null;
       closeModal(deleteModal);
-  })
-  .catch(console.error);
+    })
+    .catch(console.error);
 }
 
 function handleAvatarSubmit(evt) {
@@ -287,7 +292,7 @@ avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 profileForm.addEventListener("submit", handleEditForSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
-deleteForm.addEventListener("submit",handleDeleteSubmit);
+deleteForm.addEventListener("submit", handleDeleteSubmit);
 
 // initialCards.forEach((card) => {
 //   const cardElement = getCardElement(card);
