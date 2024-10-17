@@ -95,7 +95,8 @@ const avatarInput = avatarModal.querySelector(
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 
-const deleteModdal = document.querySelector("#modal__delete");
+const deleteModal = document.querySelector("#modal__delete");
+const deleteForm = deleteModal.querySelector(".modal__form");
 
 const previewModal = document.querySelector("#modal__preview");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
@@ -106,6 +107,9 @@ const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 
 let currentModal = null;
+
+let selectedCard;
+let selectedCardId;
 
 function handleEscKey(evt) {
   if (evt.key === "Escape" && currentModal) {
@@ -144,6 +148,12 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closeModal(modal));
 });
 
+function handleDeleteCard(cardElement, cardId){
+  selectedCard = cardElement;
+  selectedCardId = cardId;
+  openModal(deleteModal);
+}
+
 function getCardElement(data) {
   const cardElement = cardTemplate.content
     .querySelector(".card")
@@ -153,12 +163,29 @@ function getCardElement(data) {
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
 
+  
+
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-btn_liked");
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-btn_liked");
+  }
+
+  function handleLike(evt,id){
+    const isLiked = cardLikeBtn.classList.contains("card__like-btn_liked");
+    api.changeLikeStatus(id, !isLiked)
+      .then((res) => {
+        cardLikeBtn.classList.toggle("card__like-btn_liked", res.isLiked);
+      })
+      .catch(console.error);
+  }
+  
+
+  cardLikeBtn.addEventListener("click", (evt) => {
+    // cardLikeBtn.classList.toggle("card__like-btn_liked");
+    handleLike(evt,data._id);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -168,9 +195,10 @@ function getCardElement(data) {
     previewModalImageEl.alt = data.name;
   });
 
-  cardDeleteBtn.addEventListener("click", () => {
+  cardDeleteBtn.addEventListener("click", (evt) => {
     // cardElement.remove();
-    openModal(deleteModdal);
+    // openModal(deleteModal);
+    handleDeleteCard(cardElement,data._id);
   });
 
   return cardElement;
@@ -199,6 +227,18 @@ function handleAddCardSubmit(e) {
   e.target.reset();
   disableButton(cardSubmitBtn, settings);
   closeModal(cardModal);
+}
+
+function handleDeleteSubmit(evt){
+  evt.preventDefault();
+  api.deleteCard(selectedCardId)
+  .then(()=>{
+    selectedCard.remove(); 
+      selectedCard = null;  
+      selectedCardId = null;     
+      closeModal(deleteModal);
+  })
+  .catch(console.error);
 }
 
 function handleAvatarSubmit(evt) {
@@ -247,6 +287,7 @@ avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 profileForm.addEventListener("submit", handleEditForSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
+deleteForm.addEventListener("submit",handleDeleteSubmit);
 
 // initialCards.forEach((card) => {
 //   const cardElement = getCardElement(card);
