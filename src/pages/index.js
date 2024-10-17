@@ -95,6 +95,8 @@ const avatarInput = avatarModal.querySelector(
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 
+const deleteModdal = document.querySelector("#modal__delete");
+
 const previewModal = document.querySelector("#modal__preview");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
@@ -167,7 +169,8 @@ function getCardElement(data) {
   });
 
   cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
+    // cardElement.remove();
+    openModal(deleteModdal);
   });
 
   return cardElement;
