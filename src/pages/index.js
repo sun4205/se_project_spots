@@ -49,32 +49,6 @@ const api = new Api({
   },
 });
 
-const updateProfilePicUrl = `${api.baseUrl}/users/me/avatar`;
-
-function updateProfilePicture(newAvatarUrl) {
-  fetch(updateProfilePicUrl, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "2d4b9f7c-b9f4-4e18-86c3-caa0e9c274de",
-    },
-    body: JSON.stringify({ avatar: newAvatarUrl }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => console.error(err));
-}
-
-updateProfilePicture(
-  "https://around-api.en.tripleten-services.com/v1/users/me/avatar"
-);
 
 api
   .getAppInfo()

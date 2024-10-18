@@ -11,7 +11,7 @@
 
 .profile__avatar-container:hover .profile__avatar-btn {
   visibility: visible;
-  cursor: url("../images/hand.svg"), pointer;
+  cursor: pointer;
   color: #fff !important;
   width: 190px;
   height: 190px;
@@ -26,7 +26,7 @@
   z-index: 1;
 }
 
-.profile__avatar-btn {  
+.profile__avatar-btn {
   position: absolute;
   top: 0;
   left: 0;
@@ -38,13 +38,13 @@
   visibility: hidden;
   margin-bottom: 12px;
   color: #fff !important;
-  z-index: 2;    
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
 }
-.profile__avatar-btn:hover{
+.profile__avatar-btn:hover {
   filter: none;
-  color:#fff
+  color: #fff;
 }
-
 
 .profile__avatar-btn:after {
   font-size: 16px;
@@ -104,30 +104,28 @@
   cursor: pointer;
 }
 
-
 .profile__pencil-icon {
-  filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
-  margin-right: 8px;
+  /* filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
+  margin-right: 8px; */
 }
 
 .profile__pencil-icon:hover {
-  filter: grayscale(100%) brightness(0%);
-  cursor: pointer;
+  /* filter: grayscale(100%) brightness(0%); */
+  /* cursor: pointer; */
 }
 
-.profile__pencil-icon--avatar{
- 
- margin-bottom: 12px;
- font-size: 16px;
- line-height: 16px;
- font-weight: 500;
- transition: filter 0.3s ease;
+.profile__pencil-icon--avatar {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  transition: filter 0.3s ease;
 }
 
 .profile__pencil-icon--avatar:hover {
-  filter: opacity(1) brightness(1) invert(1); 
+  filter: opacity(1) brightness(1) invert(1);
   cursor: pointer;
-  color:#fff;
+  color: #fff;
 }
 .profile__button {
   outline: none;
