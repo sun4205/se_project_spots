@@ -178,14 +178,14 @@ function getCardElement(data) {
   function handleLike(evt, id) {
     const isLiked = cardLikeBtn.classList.contains("card__like-btn_liked");
     api
-      .changeLikeStatus(id, isLiked)
+      .changeLikeStatus(data._id, isLiked)
       .then((res) => {
         cardLikeBtn.classList.toggle("card__like-btn_liked", res.isLiked);
       })
       .catch(console.error);
   }
 
-  cardLikeBtn.addEventListener("click", (evt) => {});
+  cardLikeBtn.addEventListener("click", handleLike);
 
   cardImageEl.addEventListener("click", () => {
     openModal(previewModal);

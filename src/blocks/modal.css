@@ -68,7 +68,7 @@
   justify-content: space-between;
   padding: 4px 0 4px 0;
   box-sizing: border-box;
-  margin: 0 0 32px;
+  margin: 0 auto 32px;
 }
 
 .modal__close-btn {
@@ -142,6 +142,7 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin: 0 auto;
 }
 
 .modal__label {
@@ -212,9 +213,20 @@
   border: none;
 }
 
+.modal__submit-btn--delete:hover {
+  background-color: #ff3333 !important;
+  cursor: pointer;
+}
+
 .modal__submit-btn--cancel {
   background-color: #fff;
   color: #212121;
+}
+
+.modal__submit-btn--cancel:hover {
+  background-color: #212121 !important;
+  color: #fff;
+  cursor: pointer;
 }
 
 .modal__submit-btn--delete,
