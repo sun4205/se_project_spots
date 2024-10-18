@@ -26,7 +26,7 @@
   z-index: 1;
 }
 
-.profile__avatar-btn {
+.profile__avatar-btn {  
   position: absolute;
   top: 0;
   left: 0;
@@ -38,8 +38,13 @@
   visibility: hidden;
   margin-bottom: 12px;
   color: #fff !important;
-  z-index: 2;
+  z-index: 2;    
 }
+.profile__avatar-btn:hover{
+  filter: none;
+  color:#fff
+}
+
 
 .profile__avatar-btn:after {
   font-size: 16px;
@@ -99,6 +104,7 @@
   cursor: pointer;
 }
 
+
 .profile__pencil-icon {
   filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
   margin-right: 8px;
@@ -109,6 +115,20 @@
   cursor: pointer;
 }
 
+.profile__pencil-icon--avatar{
+ 
+ margin-bottom: 12px;
+ font-size: 16px;
+ line-height: 16px;
+ font-weight: 500;
+ transition: filter 0.3s ease;
+}
+
+.profile__pencil-icon--avatar:hover {
+  filter: opacity(1) brightness(1) invert(1); 
+  cursor: pointer;
+  color:#fff;
+}
 .profile__button {
   outline: none;
   border: none;
