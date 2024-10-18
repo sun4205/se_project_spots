@@ -12,7 +12,6 @@
 .profile__avatar-container:hover .profile__avatar-btn {
   visibility: visible;
   cursor: pointer;
-  color: #fff !important;
   width: 190px;
   height: 190px;
 }
@@ -22,7 +21,6 @@
   width: 190px;
   height: 190px;
   margin-right: 20px;
-  color: #fff !important;
   z-index: 1;
 }
 
@@ -37,7 +35,6 @@
   justify-content: center;
   visibility: hidden;
   margin-bottom: 12px;
-  color: #fff !important;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.6);
 }
@@ -104,16 +101,6 @@
   cursor: pointer;
 }
 
-.profile__pencil-icon {
-  /* filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
-  margin-right: 8px; */
-}
-
-.profile__pencil-icon:hover {
-  /* filter: grayscale(100%) brightness(0%); */
-  /* cursor: pointer; */
-}
-
 .profile__pencil-icon--avatar {
   margin-bottom: 12px;
   font-size: 16px;
@@ -176,11 +163,21 @@
   }
 
   .profile__avatar-btn {
-    visibility: visible;
+    visibility: hidden;
   }
 
-  .profile__add-btn::after {
+  .profile__avatar-btn::after {
     content: "";
+    visibility: visible;
+    display: block;
+    position: absolute;
+    bottom: 18px;
+    left: 52px;
+    width: 23px;
+    height: 23px;
+    background-image: url("../images/pencil_icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
   }
   .profile__avatar {
     margin: 0 0 12px;

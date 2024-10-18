@@ -49,7 +49,6 @@ const api = new Api({
   },
 });
 
-
 api
   .getAppInfo()
   .then(([cards, userInfo]) => {
