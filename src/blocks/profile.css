@@ -163,17 +163,18 @@
   }
 
   .profile__avatar-container:hover .profile__avatar-btn {
-    height: 80px; 
-    width: 80px; 
+    height: 80px;
+    width: 80px;
   }
 
   .profile__avatar-btn {
     visibility: hidden;
-    
+    height: 80px;
+    width: 80px;
   }
 
   .profile__pencil-icon--avatar {
-    display: none; 
+    display: none;
   }
 
   .profile__avatar-btn::after {
@@ -181,7 +182,7 @@
     visibility: visible;
     display: block;
     position: absolute;
-    bottom: 20px;
+    bottom: 7px;
     left: 52px;
     width: 23px;
     height: 23px;
