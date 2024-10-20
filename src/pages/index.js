@@ -198,34 +198,46 @@ enableValidation(settings);
 function handleEditForSubmit(e) {
   handleSubmit(
     () =>
-      api.editUserInfo({
-        name: editModalNameInput.value,
-        about: editModalDescriptionInput.value,
-      }),
+      api
+        .editUserInfo({
+          name: editModalNameInput.value,
+          about: editModalDescriptionInput.value,
+        })
+        .then(() => {
+          closeModal(editModal);
+        }),
     e
-  ).then(() => {
-    closeModal(editModal);
-  });
+  );
 }
-
 function handleAddCardSubmit(e) {
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
 
-  handleSubmit(() => api.addNewCard(inputValues), e).then(() => {
-    closeModal(cardModal);
-  });
+  handleSubmit(
+    () =>
+      api.addNewCard(inputValues).then(() => {
+        closeModal(cardModal);
+      }),
+    e
+  );
 }
 
 function handleDeleteSubmit(evt) {
-  handleSubmit(() => api.deleteCard(selectedCardId), evt, "Deleting...").then(
-    () => {
-      closeModal(deleteModal);
-    }
+  handleSubmit(
+    () =>
+      api.deleteCard(selectedCardId).then(() => {
+        closeModal(deleteModal);
+      }),
+    evt,
+    "Deleting..."
   );
 }
 
 function handleAvatarSubmit(evt) {
-  handleSubmit(() => api.editAvatarInfo(avatarInput.value), evt).then(() => {
-    closeModal(avatarModal);
-  });
+  handleSubmit(
+    () =>
+      api.editAvatarInfo(avatarInput.value).then(() => {
+        closeModal(avatarModal);
+      }),
+    evt
+  );
 }

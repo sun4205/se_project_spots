@@ -11,30 +11,32 @@ class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
-  _request(url, options) {
-    return fetch(url, options).then(this._checkResponse);
+  _request(endpoint, options = {}) {
+    const finalOptions = {
+      headers: this._headers,
+      ...options,
+    };
+    const url = `${this._baseUrl}${endpoint}`;
+    return fetch(url, finalOptions).then(this._checkResponse);
   }
+
+  // API methods
 
   getAppInfo() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
 
   getInitialCards() {
-    return this._request(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-    });
+    return this._request("/cards");
   }
 
   getUserInfo() {
-    return this._request(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-    });
+    return this._request("/users/me");
   }
 
   addNewCard({ name, link }) {
-    return this._request(`${this._baseUrl}/cards`, {
+    return this._request("/cards", {
       method: "POST",
-      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -43,9 +45,8 @@ class Api {
   }
 
   editUserInfo({ name, about }) {
-    return this._request(`${this._baseUrl}/users/me`, {
+    return this._request("/users/me", {
       method: "PATCH",
-      headers: this._headers,
       body: JSON.stringify({
         name,
         about,
@@ -54,9 +55,8 @@ class Api {
   }
 
   editAvatarInfo(avatar) {
-    return this._request(`${this._baseUrl}/users/me/avatar`, {
+    return this._request("/users/me/avatar", {
       method: "PATCH",
-      headers: this._headers,
       body: JSON.stringify({
         avatar,
       }),
@@ -64,16 +64,14 @@ class Api {
   }
 
   deleteCard(id) {
-    return this._request(`${this._baseUrl}/cards/${id}`, {
+    return this._request(`/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers,
     });
   }
 
   changeLikeStatus(id, isLiked) {
-    return this._request(`${this._baseUrl}/cards/${id}/likes`, {
+    return this._request(`/cards/${id}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
-      headers: this._headers,
     });
   }
 }
