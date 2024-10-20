@@ -60,9 +60,6 @@ const setEventListners = (formEl, config) => {
       toggleButtonState(inputList, buttonElement, config);
     });
   });
-  formEl.addEventListener("reset", () => {
-    disableButton(buttonElement, config);
-  });
 };
 
 export const enableValidation = (config) => {

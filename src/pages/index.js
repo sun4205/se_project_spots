@@ -6,7 +6,6 @@ import {
 } from "../scripts/validation";
 import Api from "../utils/Api.js";
 import { settings, initialCards } from "../utils/constants.js";
-
 import { handleSubmit } from "../utils/handleSubmit.js";
 import { renderLoading } from "../utils/helpers.js";
 
@@ -82,6 +81,7 @@ let currentModal = null;
 
 let selectedCard;
 let selectedCardId;
+
 function handleEscKey(evt) {
   if (evt.key === "Escape" && currentModal) {
     closeModal(currentModal);
@@ -197,68 +197,66 @@ cancelButton.addEventListener("click", () => closeModal(deleteModal));
 enableValidation(settings);
 
 function handleEditForSubmit(e) {
-  handleSubmit(
-    () =>
-      api
-        .editUserInfo({
-          name: editModalNameInput.value,
-          about: editModalDescriptionInput.value,
-        })
-        .then((card) => {
-          profileName.textContent = editModalNameInput.value;
-          profileDescription.textContent = editModalDescriptionInput.value;
-          closeModal(editModal);
-        }),
-    e
-  );
+  function makeRequest() {
+    return api
+      .editUserInfo({
+        name: editModalNameInput.value,
+        about: editModalDescriptionInput.value,
+      })
+      .then((userData) => {
+        console.log(userData);
+        profileName.textContent = userData.name;
+        profileDescription.textContent = userData.about;
+        closeModal(editModal);
+      });
+  }
+
+  handleSubmit(makeRequest, e);
 }
+
 function handleAddCardSubmit(e) {
-  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+  function makeRequest() {
+    const inputValues = {
+      name: cardNameInput.value,
+      link: cardLinkInput.value,
+    };
+    return api.addNewCard(inputValues).then((card) => {
+      const cardElement = getCardElement(card);
+      cardsList.prepend(cardElement);
+    });
+  }
 
-  handleSubmit(
-    () =>
-      api.addNewCard(inputValues).then((card) => {
-        const cardElement = getCardElement(card);
-        cardsList.prepend(cardElement);
-
-        closeModal(cardModal);
-        e.target.reset();
-        disableButton(cardSubmitBtn, settings);
-      }),
-    e
-  );
-}
-
-function handleDeleteSubmit(evt) {
-  const submitBtn = evt.submitter; 
- 
-  handleSubmit(
-    () =>
-      api.deleteCard(selectedCardId).then(() => {
-        selectedCard.remove(); 
-        selectedCard = null; 
-        selectedCardId = null; 
-        closeModal(deleteModal); 
-      }),
-    evt,
-    "Deleting..." 
-  ).finally(() => {
-    const submitBtn = evt.submitter; 
-    renderLoading(submitBtn, false, "delete"); 
+  handleSubmit(makeRequest, e).finally(() => {
+    closeModal(cardModal);
+    disableButton(cardSubmitBtn, settings);
   });
 }
 
+function handleDeleteSubmit(evt) {
+  function makeRequest() {
+    return api.deleteCard(selectedCardId).then(() => {
+      selectedCard.remove();
+      selectedCard = null;
+      selectedCardId = null;
+    });
+  }
+
+  handleSubmit(makeRequest, evt, "Deleting...").finally(() => {
+    closeModal(deleteModal);
+  });
+}
 
 function handleAvatarSubmit(evt) {
-  handleSubmit(
-    () =>
-      api.editAvatarInfo(avatarInput.value).then((data) => {
-        if (data.avatar) {
-          avatarElement.src = data.avatar;
-          avatarElement.alt = "Updated Avatar";
-        }
-        closeModal(avatarModal);
-      }),
-    evt
-  );
+  function makeRequest() {
+    return api.editAvatarInfo(avatarInput.value).then((data) => {
+      if (data.avatar) {
+        avatarElement.src = data.avatar;
+        avatarElement.alt = "Updated Avatar";
+      }
+    });
+  }
+
+  handleSubmit(makeRequest, evt).finally(() => {
+    closeModal(avatarModal);
+  });
 }
