@@ -8,6 +8,7 @@ import Api from "../utils/Api.js";
 import { settings, initialCards } from "../utils/constants.js";
 
 import { handleSubmit } from "../utils/handleSubmit.js";
+import { renderLoading } from "../utils/helpers.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -229,6 +230,8 @@ function handleAddCardSubmit(e) {
 }
 
 function handleDeleteSubmit(evt) {
+  const submitBtn = evt.submitter; 
+ 
   handleSubmit(
     () =>
       api.deleteCard(selectedCardId).then(() => {
@@ -241,7 +244,7 @@ function handleDeleteSubmit(evt) {
     "Deleting..." 
   ).finally(() => {
     const submitBtn = evt.submitter; 
-    setButtonText(submitBtn, false, "delete"); 
+    renderLoading(submitBtn, false, "delete"); 
   });
 }
 
