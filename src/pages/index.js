@@ -203,7 +203,9 @@ function handleEditForSubmit(e) {
           name: editModalNameInput.value,
           about: editModalDescriptionInput.value,
         })
-        .then(() => {
+        .then((card) => {
+          profileName.textContent = editModalNameInput.value;
+          profileDescription.textContent = editModalDescriptionInput.value;
           closeModal(editModal);
         }),
     e
@@ -214,8 +216,13 @@ function handleAddCardSubmit(e) {
 
   handleSubmit(
     () =>
-      api.addNewCard(inputValues).then(() => {
+      api.addNewCard(inputValues).then((card) => {
+        const cardElement = getCardElement(card);
+        cardsList.prepend(cardElement);
+
         closeModal(cardModal);
+        e.target.reset();
+        disableButton(cardSubmitBtn, settings);
       }),
     e
   );
@@ -225,17 +232,28 @@ function handleDeleteSubmit(evt) {
   handleSubmit(
     () =>
       api.deleteCard(selectedCardId).then(() => {
-        closeModal(deleteModal);
+        selectedCard.remove(); 
+        selectedCard = null; 
+        selectedCardId = null; 
+        closeModal(deleteModal); 
       }),
     evt,
-    "Deleting..."
-  );
+    "Deleting..." 
+  ).finally(() => {
+    const submitBtn = evt.submitter; 
+    setButtonText(submitBtn, false, "delete"); 
+  });
 }
+
 
 function handleAvatarSubmit(evt) {
   handleSubmit(
     () =>
-      api.editAvatarInfo(avatarInput.value).then(() => {
+      api.editAvatarInfo(avatarInput.value).then((data) => {
+        if (data.avatar) {
+          avatarElement.src = data.avatar;
+          avatarElement.alt = "Updated Avatar";
+        }
         closeModal(avatarModal);
       }),
     evt
