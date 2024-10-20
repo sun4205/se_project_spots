@@ -203,19 +203,29 @@ function handleEditForSubmit(e) {
         about: editModalDescriptionInput.value,
       }),
     e
-  );
+  ).then(() => {
+    closeModal(editModal);
+  });
 }
 
 function handleAddCardSubmit(e) {
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
 
-  handleSubmit(() => api.addNewCard(inputValues), e, "Saving...");
+  handleSubmit(() => api.addNewCard(inputValues), e, "Saving...").then(() => {
+    closeModal(cardModal);
+  });
 }
 
 function handleDeleteSubmit(evt) {
-  handleSubmit(() => api.deleteCard(selectedCardId), evt, "Deleting...");
+  handleSubmit(() => api.deleteCard(selectedCardId), evt, "Deleting...").then(
+    () => {
+      closeModal(deleteModal);
+    }
+  );
 }
 
 function handleAvatarSubmit(evt) {
-  handleSubmit(() => api.editAvatarInfo(avatarInput.value), evt);
+  handleSubmit(() => api.editAvatarInfo(avatarInput.value), evt).then(() => {
+    closeModal(avatarModal);
+  });
 }

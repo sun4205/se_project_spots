@@ -13,7 +13,7 @@ export function handleSubmit(request, evt, loadingText = "Saving...") {
   const initialText = submitButton.textContent;
   renderLoading(true, submitButton, initialText, loadingText);
 
-  request()
+  return request()
     .then(() => {
       evt.target.reset();
     })
