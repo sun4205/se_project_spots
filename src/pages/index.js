@@ -211,7 +211,7 @@ function handleEditForSubmit(e) {
 function handleAddCardSubmit(e) {
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
 
-  handleSubmit(() => api.addNewCard(inputValues), e, "Saving...").then(() => {
+  handleSubmit(() => api.addNewCard(inputValues), e).then(() => {
     closeModal(cardModal);
   });
 }
