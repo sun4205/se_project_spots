@@ -6,13 +6,8 @@ import {
 } from "../scripts/validation";
 import Api from "../utils/Api.js";
 import { settings, initialCards } from "../utils/constants.js";
-import {
-  handleSubmit,
-  handleEditForSubmit,
-  handleAddCardSubmit,
-  handleDeleteSubmit,
-  handleAvatarSubmit,
-} from "../utils/handleSubmit.js";
+
+import { handleSubmit } from "../utils/handleSubmit.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -199,3 +194,28 @@ deleteForm.addEventListener("submit", handleDeleteSubmit);
 cancelButton.addEventListener("click", () => closeModal(deleteModal));
 
 enableValidation(settings);
+
+function handleEditForSubmit(e) {
+  handleSubmit(
+    () =>
+      api.editUserInfo({
+        name: editModalNameInput.value,
+        about: editModalDescriptionInput.value,
+      }),
+    e
+  );
+}
+
+function handleAddCardSubmit(e) {
+  const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+
+  handleSubmit(() => api.addNewCard(inputValues), e, "Saving...");
+}
+
+function handleDeleteSubmit(evt) {
+  handleSubmit(() => api.deleteCard(selectedCardId), evt, "Deleting...");
+}
+
+function handleAvatarSubmit(evt) {
+  handleSubmit(() => api.editAvatarInfo(avatarInput.value), evt);
+}
