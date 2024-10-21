@@ -6,7 +6,13 @@ import {
   disableButton,
 } from "../scripts/validation.js";
 
-export function handleSubmit(request, evt, loadingText = "Saving...") {
+export function handleSubmit(
+  request,
+  evt,
+  settings,
+  disableBtn = true,
+  loadingText = "Saving..."
+) {
   evt.preventDefault();
 
   const submitButton = evt.submitter;
@@ -16,6 +22,9 @@ export function handleSubmit(request, evt, loadingText = "Saving...") {
   return request()
     .then(() => {
       evt.target.reset();
+      if (disableBtn) {
+        disableButton(submitButton, settings);
+      }
     })
     .catch(console.error)
     .finally(() => {

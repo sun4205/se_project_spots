@@ -45,6 +45,7 @@ const cancelButton = document.querySelector(".modal__submit-btn--cancel");
 const editModal = document.querySelector("#modal-edit");
 
 const editModalCloseBtn = editModal.querySelector(".modal__close-btn");
+const editSubmitBtn = editModal.querySelector(".modal__submit-btn");
 const editModalNameInput = editModal.querySelector("#modal-profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
   "#modal-profile-description-input"
@@ -211,7 +212,7 @@ function handleEditForSubmit(e) {
       });
   }
 
-  handleSubmit(makeRequest, e);
+  handleSubmit(makeRequest, e, settings);
 }
 
 function handleAddCardSubmit(e) {
@@ -223,13 +224,11 @@ function handleAddCardSubmit(e) {
     return api.addNewCard(inputValues).then((card) => {
       const cardElement = getCardElement(card);
       cardsList.prepend(cardElement);
+      closeModal(cardModal);
     });
   }
 
-  handleSubmit(makeRequest, e).finally(() => {
-    closeModal(cardModal);
-    disableButton(cardSubmitBtn, settings);
-  });
+  handleSubmit(makeRequest, e, settings);
 }
 
 function handleDeleteSubmit(evt) {
@@ -238,12 +237,11 @@ function handleDeleteSubmit(evt) {
       selectedCard.remove();
       selectedCard = null;
       selectedCardId = null;
+      closeModal(deleteModal);
     });
   }
 
-  handleSubmit(makeRequest, evt, "Deleting...").finally(() => {
-    closeModal(deleteModal);
-  });
+  handleSubmit(makeRequest, evt, settings, false, "Deleting...");
 }
 
 function handleAvatarSubmit(evt) {
@@ -253,10 +251,9 @@ function handleAvatarSubmit(evt) {
         avatarElement.src = data.avatar;
         avatarElement.alt = "Updated Avatar";
       }
+      closeModal(avatarModal);
     });
   }
 
-  handleSubmit(makeRequest, evt).finally(() => {
-    closeModal(avatarModal);
-  });
+  handleSubmit(makeRequest, evt, settings);
 }
