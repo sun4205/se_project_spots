@@ -13,6 +13,7 @@
   opacity: 0;
   padding: 0 20px;
   transition: opacity 0.5s ease, visibility 0.5s ease;
+  font-family: "Poppins", sans-serif;
 }
 
 .modal_opened {
@@ -30,6 +31,11 @@
   align-items: center;
   position: relative;
   transition: background-color 0.5s ease;
+}
+
+.model__container--delete {
+  padding: 32px 20px;
+  box-sizing: border-box;
 }
 
 .modal__container_type_preview {
@@ -62,7 +68,7 @@
   justify-content: space-between;
   padding: 4px 0 4px 0;
   box-sizing: border-box;
-  margin: 0 0 32px;
+  margin: 0 auto 32px;
 }
 
 .modal__close-btn {
@@ -117,9 +123,26 @@
   line-height: 32px;
 }
 
+.modal__title--delete {
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 500;
+  color: #212121;
+  margin: auto 0;
+  width: 100%;
+}
+
 .modal__form {
   max-width: 100%;
   width: 630px;
+}
+
+.modal__form-delete {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
 }
 
 .modal__label {
@@ -185,6 +208,32 @@
   text-align: center;
 }
 
+.modal__submit-btn--delete {
+  background-color: #ff6565;
+  border: none;
+}
+
+.modal__submit-btn--delete:hover {
+  background-color: #ff3333 !important;
+  cursor: pointer;
+}
+
+.modal__submit-btn--cancel {
+  background-color: #fff;
+  color: #212121;
+}
+
+.modal__submit-btn--cancel:hover {
+  background-color: #212121 !important;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal__submit-btn--delete,
+.modal__submit-btn--cancel {
+  text-align: center;
+}
+
 .modal__submit-btn:hover {
   background-color: rgba(33, 33, 33, 0.8);
 }
@@ -234,11 +283,13 @@
     line-height: 16px;
     margin-bottom: 24px;
   }
+
   .modal__submit-btn {
     width: 100%;
     height: 52px;
     margin-bottom: 12px;
   }
+
   .modal__close-btn_type_preview {
     position: absolute;
     top: -30px;

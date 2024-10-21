@@ -5,11 +5,49 @@
   align-items: flex-start;
 }
 
+.profile__avatar-container {
+  position: relative;
+}
+
+.profile__avatar-container:hover .profile__avatar-btn {
+  visibility: visible;
+  cursor: pointer;
+  width: 190px;
+  height: 190px;
+}
+
 .profile__avatar {
   object-fit: cover;
   width: 190px;
   height: 190px;
   margin-right: 20px;
+  z-index: 1;
+}
+
+.profile__avatar-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  margin-bottom: 12px;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.profile__avatar-btn:hover {
+  filter: none;
+  color: #fff;
+}
+
+.profile__avatar-btn:after {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #fff !important;
 }
 
 .profile__column {
@@ -47,7 +85,7 @@
 }
 
 .profile__edit-btn {
-  background-image: url(../images/Button\ secondary.svg);
+  background-image: url(../images/Button_secondary.svg);
   width: 107.34px;
   height: 16px;
   margin-top: auto;
@@ -63,16 +101,19 @@
   cursor: pointer;
 }
 
-.profile__pencil-icon {
-  filter: opacity(0.8) grayscale(100%) brightness(0.5) invert(0.6);
-  margin-right: 8px;
+.profile__pencil-icon--avatar {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  transition: filter 0.3s ease;
 }
 
-.profile__pencil-icon:hover {
-  filter: grayscale(100%) brightness(0%);
+.profile__pencil-icon--avatar:hover {
+  filter: opacity(1) brightness(1) invert(1);
   cursor: pointer;
+  color: #fff;
 }
-
 .profile__button {
   outline: none;
   border: none;
@@ -121,6 +162,34 @@
     box-sizing: border-box;
   }
 
+  .profile__avatar-container:hover .profile__avatar-btn {
+    height: 80px;
+    width: 80px;
+  }
+
+  .profile__avatar-btn {
+    visibility: hidden;
+    height: 80px;
+    width: 80px;
+  }
+
+  .profile__pencil-icon--avatar {
+    display: none;
+  }
+
+  .profile__avatar-btn::after {
+    content: "";
+    visibility: visible;
+    display: block;
+    position: absolute;
+    bottom: 7px;
+    left: 52px;
+    width: 23px;
+    height: 23px;
+    background-image: url("../images/pencil_icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
   .profile__avatar {
     margin: 0 0 12px;
     height: 80px;
