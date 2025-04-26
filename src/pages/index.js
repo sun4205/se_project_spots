@@ -9,30 +9,6 @@ import { settings, initialCards } from "../utils/constants.js";
 import { handleSubmit } from "../utils/handleSubmit.js";
 import { renderLoading } from "../utils/helpers.js";
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "2d4b9f7c-b9f4-4e18-86c3-caa0e9c274de",
-    "Content-Type": "application/json",
-  },
-});
-
-api
-  .getAppInfo()
-  .then(([cards, userInfo]) => {
-    cards.forEach((card) => {
-      const cardElement = getCardElement(card);
-      cardsList.prepend(cardElement);
-    });
-
-    profileName.textContent = userInfo.name;
-    profileDescription.textContent = userInfo.about;
-
-    const avatarImage = document.querySelector(".profile__avatar");
-    avatarImage.src = userInfo.avatar;
-  })
-  .catch(console.error);
-
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
 const profileEditButton = document.querySelector(".profile__edit-btn");
@@ -43,7 +19,6 @@ const cardSubmitBtn = cardForm.querySelector(".modal__submit-btn");
 const cancelButton = document.querySelector(".modal__submit-btn--cancel");
 
 const editModal = document.querySelector("#modal-edit");
-
 const editModalCloseBtn = editModal.querySelector(".modal__close-btn");
 const editSubmitBtn = editModal.querySelector(".modal__submit-btn");
 const editModalNameInput = editModal.querySelector("#modal-profile-name-input");
@@ -52,7 +27,6 @@ const editModalDescriptionInput = editModal.querySelector(
 );
 
 const cardModal = document.querySelector("#modal__add-card");
-
 const cardModalClosebtn = cardModal.querySelector(".modal__close-btn");
 const cardNameInput = cardModal.querySelector("#modal__add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#modal__add-card-link-input");
@@ -79,53 +53,8 @@ const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 
 let currentModal = null;
-
 let selectedCard;
 let selectedCardId;
-
-function handleEscKey(evt) {
-  if (evt.key === "Escape" && currentModal) {
-    closeModal(currentModal);
-  }
-}
-
-function handleOutsideClick(evt) {
-  if (currentModal && evt.target === currentModal) {
-    closeModal(currentModal);
-  }
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  currentModal = modal;
-  document.addEventListener("keydown", handleEscKey);
-  document.addEventListener("click", handleOutsideClick);
-  console.log("Modal opened and Escape key listener added");
-}
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  if (currentModal === modal) {
-    currentModal = null;
-  }
-  document.removeEventListener("keydown", handleEscKey);
-  document.removeEventListener("click", handleOutsideClick);
-  console.log("Modal closed and Escape key listener removed");
-}
-
-const closeButtons = document.querySelectorAll(".modal__close-btn");
-
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-
-  button.addEventListener("click", () => closeModal(modal));
-});
-
-function handleDeleteCard(cardElement, cardId) {
-  selectedCard = cardElement;
-  selectedCardId = cardId;
-  openModal(deleteModal);
-}
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -170,6 +99,68 @@ function getCardElement(data) {
   return cardElement;
 }
 
+function handleDeleteCard(cardElement, cardId) {
+  selectedCard = cardElement;
+  selectedCardId = cardId;
+  openModal(deleteModal);
+}
+
+function handleEscKey(evt) {
+  if (evt.key === "Escape" && currentModal) {
+    closeModal(currentModal);
+  }
+}
+
+function handleOutsideClick(evt) {
+  if (currentModal && evt.target === currentModal) {
+    closeModal(currentModal);
+  }
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  currentModal = modal;
+  document.addEventListener("keydown", handleEscKey);
+  document.addEventListener("click", handleOutsideClick);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  if (currentModal === modal) {
+    currentModal = null;
+  }
+  document.removeEventListener("keydown", handleEscKey);
+  document.removeEventListener("click", handleOutsideClick);
+}
+
+const closeButtons = document.querySelectorAll(".modal__close-btn");
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "2d4b9f7c-b9f4-4e18-86c3-caa0e9c274de",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getAppInfo()
+  .then(([cards, userInfo]) => {
+    cards.forEach((card) => {
+      const cardElement = getCardElement(card);
+      cardsList.prepend(cardElement);
+    });
+
+    profileName.textContent = userInfo.name;
+    profileDescription.textContent = userInfo.about;
+    avatarElement.src = userInfo.avatar;
+  })
+  .catch(console.error);
+
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -181,13 +172,8 @@ profileEditButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-cardModalbtn.addEventListener("click", () => {
-  openModal(cardModal);
-});
-
-avatarEditButton.addEventListener("click", () => {
-  openModal(avatarModal);
-});
+cardModalbtn.addEventListener("click", () => openModal(cardModal));
+avatarEditButton.addEventListener("click", () => openModal(avatarModal));
 
 avatarForm.addEventListener("submit", handleAvatarSubmit);
 profileForm.addEventListener("submit", handleEditForSubmit);
@@ -205,13 +191,11 @@ function handleEditForSubmit(e) {
         about: editModalDescriptionInput.value,
       })
       .then((userData) => {
-        console.log(userData);
         profileName.textContent = userData.name;
         profileDescription.textContent = userData.about;
         closeModal(editModal);
       });
   }
-
   handleSubmit(makeRequest, e, settings);
 }
 
@@ -227,7 +211,6 @@ function handleAddCardSubmit(e) {
       closeModal(cardModal);
     });
   }
-
   handleSubmit(makeRequest, e, settings);
 }
 
@@ -240,7 +223,6 @@ function handleDeleteSubmit(evt) {
       closeModal(deleteModal);
     });
   }
-
   handleSubmit(makeRequest, evt, settings, false, "Deleting...");
 }
 
@@ -254,6 +236,5 @@ function handleAvatarSubmit(evt) {
       closeModal(avatarModal);
     });
   }
-
   handleSubmit(makeRequest, evt, settings);
 }
