@@ -20,8 +20,6 @@ class Api {
     return fetch(url, finalOptions).then(this._checkResponse);
   }
 
-  // API methods
-
   getAppInfo() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
