@@ -20,6 +20,8 @@ const api = new Api({
 api
   .getAppInfo()
   .then(([cards, userInfo]) => {
+    console.log("userInfo.avatar:", userInfo.avatar);
+
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardsList.prepend(cardElement);
@@ -29,7 +31,12 @@ api
     profileDescription.textContent = userInfo.about;
 
     const avatarImage = document.querySelector(".profile__avatar");
-    avatarImage.src = userInfo.avatar;
+
+    if (userInfo.avatar) {
+      avatarImage.src = userInfo.avatar;
+    } else {
+      avatarImage.src = "./images/avatar.svg";
+    }
   })
   .catch(console.error);
 
