@@ -22,4 +22,4 @@ Responsive design was used to ensure the web and application contents are correc
 ## Deployment
 
 project on GitHub Pages [here](https://sun4205.github.io/se_project_spots/)
-video for the project [here](https://drive.google.com/file/d/1QcjdvLiNJkiOdXLkhm2G6JRMmT0pieMP/view?usp=sharing)
+video for the project [here](https://vimeo.com/1079039445/ed79088d92?ts=0&share=copy)
