@@ -16,8 +16,8 @@ Responsive design was used to ensure the web and application contents are correc
 
 ## Screenshots
 
-- This is screenshot for desktop screen. ![alt text](./images/demo/Screenshot_desktop.png)
-- This is screenshot for mobile screen.![alt text](./images/demo/Screenshot_mobile.png)
+- This is screenshot for desktop screen. ![alt text](./src/images/Screenshot_desk.png)
+- This is screenshot for mobile screen.![alt text](./src/images/Screenshot_mobile.png)
 
 ## Deployment
 
